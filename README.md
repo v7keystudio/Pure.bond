@@ -1,8 +1,5 @@
 > 💖 **Pure.bond is more than a website — it's a digital celebration of the purest bond between a brother and sister.**
->
-> 💖 Pure.bond — Raksha Bandhan Interactive Experience
-
-«A beautiful, interactive web experience created to celebrate the purest bond between a brother and sister. 🎀»
+A beautiful, interactive web experience created to celebrate the purest bond between a brother and sister. 🎀»
 
 Pure.bond is a modern, animated Raksha Bandhan-themed website featuring interactive pages, gift ideas, cherished memories, smooth transitions, background music, and a heartfelt special wish.
 
@@ -157,9 +154,9 @@ For the best experience, you can also use VS Code + Live Server.
 
 🌐 Project Files
 
-You can access the project assets and files from the shared Google Drive folder:
-
-👉 "Open Project Files" (https://drive.google.com/drive/folders/1C3nKtAEc0XMH3Ggc174GOIhuyZignDyV)
+<a href="https://drive.google.com/drive/folders/1C3nKtAEc0XMH3Ggc174GOIhuyZignDyV">
+  <img src="https://img.shields.io/badge/👀%20Preview-Visit%20Website-111111?style=for-the-badge" alt="Portfolio">
+</a>
 
 ---
 
