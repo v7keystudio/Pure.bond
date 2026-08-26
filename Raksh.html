@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Raksha Bandhan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fdf2f8;
+            overflow: hidden;
+        }
+
+        .font-dancing-script {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .first-box {
+            background: aliceblue;
+            border: 1px solid #9d1238;
+            border-radius: 20px;
+            box-shadow: 0px 9px 37px 0px beige;
+            padding: 30px;
+        }
+
+        /* Page styles */
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        /* Hide all pages except the first one initially */
+        .page:not(#page1) {
+            display: none;
+        }
+
+        /* Elements to animate inside pages */
+        .anim-element {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Floating animation for cards */
+        .card-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Animated Shadow Styles */
+        .animated-shadow-rose {
+            box-shadow: 0 4px 14px rgba(227, 102, 152, 0.25);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+
+        .animated-shadow-rose:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(227, 102, 152, 0.4);
+        }
+
+        .animated-shadow-purple {
+            box-shadow: 0 4px 14px rgba(126, 34, 206, 0.2);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+
+        .animated-shadow-purple:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(126, 34, 206, 0.35);
+        }
+
+        .animated-shadow-teal {
+            box-shadow: 0 4px 14px rgba(13, 148, 136, 0.2);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+
+        .animated-shadow-teal:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(13, 148, 136, 0.35);
+        }
+
+        /* Particle background for page 1 */
+        #particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: transparent;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(225, 29, 72, 0.35);
+            border-radius: 50%;
+            animation: move linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(-105vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="overflow-hidden">
+
+    <!-- Background Audio Element -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="songu.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle Button (Floating Top-Right) -->
+    <button id="musicToggleBtn" title="Toggle Music"
+        class="fixed top-4 right-4 z-50 bg-white/80 hover:bg-white text-rose-700 p-3 rounded-full shadow-lg backdrop-blur-sm border border-rose-200 transition-all duration-300 hover:scale-110 flex items-center justify-center cursor-pointer">
+        <!-- Music Note SVG Icon -->
+        <svg id="musicIconPlay" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+        <svg id="musicIconMute" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73l4.73 4.73c-.34.17-.7.3-1.09.39v2.06c.94-.21 1.8-.62 2.54-1.19l2.55 2.55 1.27-1.27L4.27 3zM12 7V3h6v4h-4v3.18L12 8.18V7z"/>
+        </svg>
+    </button>
+
+    <!-- Main Container -->
+    <div class="relative min-h-screen w-full">
+
+        <!-- Page 1: Welcome Page -->
+        <section id="page1" class="page text-center justify-center bg-gradient-to-br from-rose-100 to-teal-100">
+            <div id="particles-container"></div>
+            <div class="max-w-3xl z-10 first-box my-auto">
+                <h1 class="font-dancing-script text-6xl md:text-8xl text-rose-800 anim-element">Happy Raksha Bandhan
+                </h1>
+                <p class="mt-6 text-lg md:text-xl text-gray-700 max-w-2xl mx-auto anim-element">
+                    Celebrating the purest bond of love, care, and protection. Raksha Bandhan is a beautiful reminder of
+                    the lifelong promise between a brother and sister, a thread that ties hearts together forever.
+                </p>
+                <button id="toPage2Btn"
+                    class="mt-12 px-8 py-3 bg-rose-600 text-white font-semibold rounded-full animated-shadow-rose anim-element cursor-pointer">
+                    Let's Celebrate
+                </button>
+            </div>
+        </section>
+
+        <!-- Page 2: Gift for Sister Page -->
+        <section id="page2" class="page text-center bg-gradient-to-br from-purple-100 to-rose-100">
+            <div class="container mx-auto my-auto py-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-purple-800 mb-12 anim-element">A Gift For Your Beloved
+                    Sister</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Gift Card 1 -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 text-center anim-element card-float"
+                        style="animation-delay: 0s;">
+                        <img src="images/Chocolates.jpg" alt="Chocolates"
+                            class="w-full h-40 object-cover rounded-lg mx-auto mb-4">
+                        <h3 class="text-2xl font-semibold text-gray-800">Gourmet Chocolates</h3>
+                        <p class="text-gray-600 mt-2">A sweet treat for your even sweeter sister.</p>
+                    </div>
+                    <!-- Gift Card 2 -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 text-center anim-element card-float"
+                        style="animation-delay: 0.5s;">
+                        <img src="images/Elegant Bracelet.jpg" alt="Bracelet"
+                            class="w-full h-40 object-cover rounded-lg mx-auto mb-4">
+                        <h3 class="text-2xl font-semibold text-gray-800">Elegant Bracelet</h3>
+                        <p class="text-gray-600 mt-2">A symbol of your unbreakable bond, to cherish forever.</p>
+                    </div>
+                    <!-- Gift Card 3 -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 text-center anim-element card-float"
+                        style="animation-delay: 1s;">
+                        <img src="images/Stylish Dress.jpg" alt="Dress"
+                            class="w-full h-40 object-cover rounded-lg mx-auto mb-4">
+                        <h3 class="text-2xl font-semibold text-gray-800">Stylish Dress</h3>
+                        <p class="text-gray-600 mt-2">To make her feel as special as she truly is.</p>
+                    </div>
+                    <!-- Gift Card 4 -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 text-center anim-element card-float"
+                        style="animation-delay: 1.5s;">
+                        <img src="images/Exotic Perfume.jpg" alt="Perfume"
+                            class="w-full h-40 object-cover rounded-lg mx-auto mb-4">
+                        <h3 class="text-2xl font-semibold text-gray-800">Exotic Perfume</h3>
+                        <p class="text-gray-600 mt-2">A fragrance to remind her of your lovely memories.</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center gap-4 mt-12 anim-element">
+                    <button id="toPage3Btn"
+                        class="px-8 py-3 bg-purple-600 text-white font-semibold rounded-full animated-shadow-purple cursor-pointer">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 3: Memories Page -->
+        <section id="page3" class="page text-center bg-gradient-to-br from-teal-100 to-yellow-100">
+            <div class="container mx-auto my-auto py-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-teal-800 mb-8 anim-element">Cherished Moments Together</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- Gallery Images -->
+                    <div class="anim-element"><img src="images/ima1.jpg" alt="Memory 1"
+                            class="gallery-image w-full h-36 sm:h-44 object-cover rounded-lg shadow-md cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="anim-element"><img
+                            src="images/Raksha Bandhan Photos_, Raksha Bandhan Pics Or Raksha Bandhan Full Hd Photo.jpg"
+                            alt="Memory 2"
+                            class="gallery-image w-full h-36 sm:h-44 object-cover rounded-lg shadow-md cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="anim-element"><img src="images/Rakshabandhan dp.jpg" alt="Memory 3"
+                            class="gallery-image w-full h-36 sm:h-44 object-cover rounded-lg shadow-md cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="anim-element"><img src="images/sister brother.png" alt="Memory 4"
+                            class="gallery-image w-full h-36 sm:h-44 object-cover rounded-lg shadow-md cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="anim-element"><img src="images/gift.webp" alt="Memory 5"
+                            class="gallery-image w-full h-36 sm:h-44 object-cover rounded-lg shadow-md cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="anim-element"><img src="images/TT.webp" alt="Memory 6"
+                            class="gallery-image w-full h-36 sm:h-44 object-cover rounded-lg shadow-md cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="anim-element"><img
+                            src="images/indian-asian-brothers-sisters-celebrating-600nw-2480867183.webp" alt="Memory 7"
+                            class="gallery-image w-full h-36 sm:h-44 object-cover rounded-lg shadow-md cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="anim-element"><img
+                            src="images/Rk.webp"
+                            alt="Memory 8"
+                            class="gallery-image w-full h-36 sm:h-44 object-cover rounded-lg shadow-md cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                </div>
+                
+                <!-- Action Buttons: Wishes & Back to Home -->
+                <div class="flex flex-wrap items-center justify-center gap-4 mt-8 anim-element">
+                    <button id="showWishesBtn"
+                        class="px-8 py-3 bg-teal-600 text-white font-semibold rounded-full animated-shadow-teal cursor-pointer">
+                        A Special Wish For You
+                    </button>
+                    <button id="page3HomeBtn"
+                        class="px-8 py-3 bg-white text-teal-800 font-semibold rounded-full border border-teal-600 shadow-md hover:bg-teal-50 transition-colors cursor-pointer">
+                        🏠 Back to Home
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal"
+        class="modal fixed inset-0 bg-black/70 flex items-center justify-center p-4 hidden z-50">
+        <img id="modalImage" src="" alt="Full-size memory"
+            class="modal-content rounded-lg shadow-2xl max-w-[90vw] max-h-[80vh] object-contain">
+        <button class="close-modal-btn absolute top-4 right-4 text-white text-4xl font-bold cursor-pointer hover:text-rose-400 transition-colors">&times;</button>
+    </div>
+
+    <!-- Wishes Modal -->
+    <div id="wishesModal"
+        class="modal fixed inset-0 bg-black/70 flex items-center justify-center p-4 hidden z-50">
+        <div
+            class="modal-content relative max-w-lg mx-auto bg-gradient-to-br from-white to-gray-100 p-8 rounded-2xl shadow-2xl text-center">
+            <button class="close-modal-btn absolute top-2 right-4 text-gray-500 text-3xl font-bold cursor-pointer hover:text-red-500 transition-colors">&times;</button>
+            <h3 class="text-3xl font-bold text-teal-900 mb-4 font-dancing-script">To the Best Sister in the World!</h3>
+            <p class="text-lg text-gray-800 leading-relaxed mb-6">
+                Happy Raksha Bandhan! Yeh sirf ek dhaga nahi, hamare pyaar aur yaadon ka prateek hai. Hamesha mere saath
+                rehne ke liye, meri har pareshani me mera sahara banne ke liye, thank you. Bhagwan tumhe duniya ki saari
+                khushiyan de.
+            </p>
+            <button id="modalHomeBtn"
+                class="px-8 py-2.5 bg-rose-600 text-white font-semibold rounded-full animated-shadow-rose cursor-pointer">
+                🏠 Go to Home
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Page elements
+            const pages = document.querySelectorAll('.page');
+            const toPage2Btn = document.getElementById('toPage2Btn');
+            const toPage3Btn = document.getElementById('toPage3Btn');
+            const showWishesBtn = document.getElementById('showWishesBtn');
+            const page3HomeBtn = document.getElementById('page3HomeBtn');
+            const modalHomeBtn = document.getElementById('modalHomeBtn');
+
+            // Modal elements
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const galleryImages = document.querySelectorAll('.gallery-image');
+            const wishesModal = document.getElementById('wishesModal');
+
+            // Audio Elements
+            const bgMusic = document.getElementById('bgMusic');
+            const musicToggleBtn = document.getElementById('musicToggleBtn');
+            const musicIconPlay = document.getElementById('musicIconPlay');
+            const musicIconMute = document.getElementById('musicIconMute');
+            let isMusicPlaying = false;
+
+            // Function to safely play music
+            function playMusic() {
+                if (bgMusic) {
+                    bgMusic.volume = 0.6;
+                    bgMusic.play().then(() => {
+                        isMusicPlaying = true;
+                        musicIconPlay.classList.remove('hidden');
+                        musicIconMute.classList.add('hidden');
+                    }).catch(() => {
+                        // Browsers require first user gesture to autoplay
+                        isMusicPlaying = false;
+                        musicIconPlay.classList.add('hidden');
+                        musicIconMute.classList.remove('hidden');
+                    });
+                }
+            }
+
+            function toggleMusic() {
+                if (!bgMusic) return;
+                if (isMusicPlaying) {
+                    bgMusic.pause();
+                    isMusicPlaying = false;
+                    musicIconPlay.classList.add('hidden');
+                    musicIconMute.classList.remove('hidden');
+                } else {
+                    playMusic();
+                }
+            }
+
+            musicToggleBtn.addEventListener('click', toggleMusic);
+
+            // Attempt autoplay on load and on first click interaction anywhere
+            playMusic();
+            const startMusicOnInteraction = () => {
+                if (!isMusicPlaying) playMusic();
+                window.removeEventListener('click', startMusicOnInteraction);
+                window.removeEventListener('touchstart', startMusicOnInteraction);
+            };
+            window.addEventListener('click', startMusicOnInteraction);
+            window.addEventListener('touchstart', startMusicOnInteraction);
+
+            let isTransitioning = false;
+
+            // --- Particle Animation for Page 1 ---
+            function createParticles() {
+                const container = document.getElementById('particles-container');
+                if (!container) return;
+                container.innerHTML = '';
+                const particleCount = 35;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    const size = Math.random() * 6 + 2;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    particle.style.animationDuration = `${Math.random() * 8 + 4}s`;
+                    particle.style.animationDelay = `${Math.random() * 3}s`;
+                    container.appendChild(particle);
+                }
+            }
+            createParticles();
+
+            // --- GSAP Animations setup ---
+            gsap.set(pages, { autoAlpha: 0 });
+            gsap.set(document.querySelectorAll('.page:not(#page1)'), { display: 'none' });
+            gsap.set('#page1', { autoAlpha: 1 });
+            gsap.set([imageModal, wishesModal], { autoAlpha: 0 });
+
+            gsap.fromTo("#page1 .anim-element",
+                { y: 30, autoAlpha: 0 },
+                { y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.2, ease: 'power2.out' }
+            );
+
+            // Function to switch pages safely
+            function switchPage(fromPage, toPage, direction = 'forward') {
+                if (isTransitioning || !fromPage || !toPage || fromPage === toPage) return;
+                isTransitioning = true;
+
+                const fromElements = fromPage.querySelectorAll('.anim-element');
+                const toElements = toPage.querySelectorAll('.anim-element');
+
+                const exitX = direction === 'forward' ? '-100%' : '100%';
+                const enterX = direction === 'forward' ? '100%' : '-100%';
+
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        isTransitioning = false;
+                    }
+                });
+
+                tl.to(fromElements, { y: -20, autoAlpha: 0, duration: 0.35, stagger: 0.05, ease: 'power2.in' })
+                    .to(fromPage, { x: exitX, autoAlpha: 0, duration: 0.55, ease: 'power3.inOut' }, "-=0.15")
+                    .set(fromPage, { display: 'none' })
+                    .set(toPage, { display: 'flex', x: enterX, autoAlpha: 0 })
+                    .to(toPage, { x: '0%', autoAlpha: 1, duration: 0.55, ease: 'power3.inOut' })
+                    .fromTo(toElements,
+                        { y: 30, autoAlpha: 0 },
+                        { y: 0, autoAlpha: 1, duration: 0.55, stagger: 0.1, ease: 'power2.out' },
+                        "-=0.25"
+                    );
+            }
+
+            // Event Listeners for page navigation
+            toPage2Btn.addEventListener('click', () => {
+                switchPage(document.getElementById('page1'), document.getElementById('page2'), 'forward');
+            });
+
+            toPage3Btn.addEventListener('click', () => {
+                switchPage(document.getElementById('page2'), document.getElementById('page3'), 'forward');
+            });
+
+            // Back to Home from Page 3
+            page3HomeBtn.addEventListener('click', () => {
+                switchPage(document.getElementById('page3'), document.getElementById('page1'), 'backward');
+            });
+
+            // --- Modal Logic ---
+            function openModal(modal) {
+                modal.classList.remove('hidden');
+                gsap.to(modal, { autoAlpha: 1, duration: 0.3 });
+                const modalContent = modal.querySelector('.modal-content');
+                if (modalContent) {
+                    gsap.fromTo(modalContent, { scale: 0.85, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.3, ease: 'back.out(1.5)' });
+                }
+            }
+
+            function closeModal(modal) {
+                gsap.to(modal, {
+                    autoAlpha: 0,
+                    duration: 0.25,
+                    onComplete: () => {
+                        modal.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Setup Image Modal Click
+            galleryImages.forEach(image => {
+                image.addEventListener('click', () => {
+                    modalImage.src = image.src;
+                    openModal(imageModal);
+                });
+            });
+
+            // Setup Wishes Modal Click
+            showWishesBtn.addEventListener('click', () => {
+                openModal(wishesModal);
+            });
+
+            // Modal Go to Home Button
+            modalHomeBtn.addEventListener('click', () => {
+                closeModal(wishesModal);
+                switchPage(document.getElementById('page3'), document.getElementById('page1'), 'backward');
+            });
+
+            // Setup modal close events
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal(modal);
+                });
+                const closeBtn = modal.querySelector('.close-modal-btn');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        closeModal(modal);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
